@@ -10,7 +10,9 @@ function fillButton(index, text) {
 function winningAlert(winner) {
   confirm(`Horraaay, ${winner} wins!`)?restartGame():0;
 }
-
+function drawingAlert() {
+  confirm("No one won the game! good luck next time :P")?restartGame():0;
+}
 // SAMPLE CODE: This code fills the 1st and 9th button with X and O initially
 // ❗️ Delete this code once you are done testing
 
@@ -38,6 +40,7 @@ function clickButton(index) {
   console.log(checkWinner());
   (checkWinner()?changePlayerTurn():0);
   (checkWinner()?winningAlert(checkPlayer()):0);
+  cheackDraw();
 }
 
 // change players turn
@@ -112,5 +115,21 @@ function checkWinner()
 function restartGame()
 {
   window.location.reload();
+}
+
+function cheackDraw()
+{
+    // first get the list of filled boxs
+    let boxs = []
+    for(i=1;i<10;i++)
+    {
+      boxs.push(document.getElementById(i).innerHTML);
+    }
+    console.log("$$$", boxs)
+    const filled = boxs.some(xORo=>xORo==="");
+    console.log("£££",filled);
+    // then check if it is full and still no one won
+    ((!checkWinner()&&!filled)?drawingAlert():0);
+
 }
 
